@@ -25,12 +25,15 @@ public final class MyData {
 }
 ```
 
-It even works with Java 16 records:
+It even works with Java 16 records, unfortunately a somewhat redundant empty compact constructor is needed:
 
 ```java
 
-@Jacksonized
-@Builder
 public record MyDataRecord(String property1) {
+    @Jacksonized
+    @Builder
+    public MyDataRecord {
+        // empty for lombok
+    }
 }
 ```

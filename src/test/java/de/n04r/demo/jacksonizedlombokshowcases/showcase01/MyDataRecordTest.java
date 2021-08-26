@@ -6,7 +6,7 @@ class MyDataRecordTest extends AbstractJsonTest {
 
     MyDataRecordTest() {
         super(
-                new MyDataRecord("value1"),
+                MyDataRecord.builder().property1("value1").build(),
                 """
                         {"property1":"value1"}
                         """);

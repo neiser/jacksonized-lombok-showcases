@@ -5,7 +5,7 @@ import de.n04r.demo.jacksonizedlombokshowcases.AbstractJsonTest;
 class MyDataTest extends AbstractJsonTest {
     MyDataTest() {
         super(
-                new MyData("value1"),
+                MyData.builder().property1("value1").build(),
                 """
                         {"property1":"value1"}
                         """
