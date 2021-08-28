@@ -7,7 +7,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractJsonTest {
@@ -24,7 +24,7 @@ public abstract class AbstractJsonTest {
     @Test
     void deserialize() throws Exception {
         var actual = OBJECT_MAPPER.readValue(json, sut.getClass());
-        assertEquals(sut, actual);
+        assertThat(sut).isEqualTo(actual);
     }
 
     @Test

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.n04r.demo.jacksonizedlombokshowcases.AbstractJsonTest;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MyDataTest extends AbstractJsonTest {
@@ -23,6 +24,6 @@ class MyDataTest extends AbstractJsonTest {
                     "deprecatedProperty1":"value1"
                 }
                 """, sut.getClass());
-        assertEquals(sut, actual);
+        assertThat(sut).isEqualTo(actual);
     }
 }
