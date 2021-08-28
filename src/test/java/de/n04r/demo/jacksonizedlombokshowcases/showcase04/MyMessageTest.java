@@ -1,7 +1,8 @@
-package de.n04r.demo.jacksonizedlombokshowcases.showcase03;
+package de.n04r.demo.jacksonizedlombokshowcases.showcase04;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.n04r.demo.jacksonizedlombokshowcases.showcase04.MyAbstractIdMessage.MyAbstractIdMessageBuilder;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
@@ -10,10 +11,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MyMessageTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private static final MyMessage1 MESSAGE_1 = new MyMessage1("value1");
+    private static final MyMessage1 MESSAGE_1 = fillId(MyMessage1.builder())
+            .property1("value1")
+            .build();
+
+    private static final MyMessage2 MESSAGE_2 = fillId(MyMessage2.builder())
+            .property2("value2")
+            .build();
+
+    private static <B extends MyAbstractIdMessageBuilder<?, ? extends B>> B fillId(B builder) {
+        // why is there an explicit cast necessary to (B)?
+        return (B) builder.id("id");
+    }
+
     private static final String MESSAGE1_JSON = """
             {
                 "type": "message1",
+                "id": "id",
                 "property1": "value1"
             }
             """;
@@ -21,10 +35,10 @@ class MyMessageTest {
     private static final String MESSAGE2_JSON = """
             {
                 "type": "message2",
+                "id": "id",
                 "property2": "value2"
             }
             """;
-    private static final MyMessage2 MESSAGE_2 = new MyMessage2("value2");
 
     @Test
     void polymorphicDeserialization() throws Exception {
